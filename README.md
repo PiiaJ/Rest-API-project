@@ -1,4 +1,4 @@
 # Rest-API-project
 
-This is a project using mongoose for database queries.
-Repository in github:
+This is an unfinished project using mongoose for database queries.
+Repository in github: https://github.com/PiiaJ/Rest-API-project
