@@ -87,12 +87,40 @@ AirBnB.findOneAndUpdate(query, newData, options, function (err, results) {
 });
 
 // print out all airbnbs
-app.get("/api/places", function (req, res) {
+app.get("/api/getall", function (req, res) {
   AirBnB.find({}, null, { limit: 20 }, function (err, results) {
     if (err) {
       res.json("Error while trying to fetch from database", 500);
     } else {
       res.status(200).json(results);
+    }
+  });
+});
+
+// find one place by id
+app.get("/api/:id", function (req, res) {
+  var id = req.params.id;
+  AirBnB.findById(id, function (err, results) {
+    // db error handling
+    if (err) {
+      console.log(err);
+      res.status(500).json("Operation not successful");
+    }
+    // db ok, object not found
+    else if (results == null) {
+      res.status(200).json("Nothing to be found with this id");
+    } // delete successful
+    else {
+      res
+        .status(200)
+        .json(
+          "Found airBnB " +
+            results.name +
+            ", with description " +
+            results.description +
+            " with " +
+            id
+        );
     }
   });
 });
